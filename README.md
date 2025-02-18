@@ -27,3 +27,7 @@ CLeaned Merged Dataset.csv--Uploaded by Mengyan Li--The cleaned version of merge
 Visualization1.qmd--Uploaded by Mengyan Li--The linear regresion visualization of newreview.csv(dependent variable: overall score) and the linear regression visualization of CLeaned Merged Dataset.csv (dependent variable: poplarity)
 
 EDA and Feature Engineering.ipynb--Uploaded by Mengyan Li--Some EDA and feature engineering to the merged dataset
+
+2.17
+
+info_reg.ipynb--Uploaded by Zhisheng--Linear regression–y: pop, Standardization/Normalization on info numericals
