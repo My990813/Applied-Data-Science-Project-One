@@ -57,4 +57,15 @@ info_reg.ipynb--Uploaded by Zhisheng--Linear regression–y: pop, Standardizatio
     - [scrape_mydramalist.py](./scripts/scrape_mydramalist.py): script to web scrape missing info (director, writer, synopsis, etc.) from [mydramalist.com](https://mydramalist.com) using Selenium and BeautifulSoup
 
 2.19
+
 Visualization.ipynb---Updated and renamed as BarPlotAndBoxPlot.ipynb by Zishun
+
+EDA and Feature Engineering.ipynb---Modified by Zishun---included additional one-hot encoded categorical columns:
+
+1. Keep `year` and reverting it to `int` type
+
+2. Drop `org_net` since it's too troublesome to handle
+
+3. Drop all 10 original num_columns, keep StandardScaler and MinMaxScaler of `pop` and `n_helpful`
+
+4. In addition multiple-hot encoded air_on
