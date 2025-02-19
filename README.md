@@ -55,3 +55,6 @@ info_reg.ipynb--Uploaded by Zhisheng--Linear regression–y: pop, Standardizatio
 [scripts](./scripts/) -- folder containing scripts
     - [classify_sentiment.py](./scripts/classify_sentiment.py): script to classify sentiment of reviews
     - [scrape_mydramalist.py](./scripts/scrape_mydramalist.py): script to web scrape missing info (director, writer, synopsis, etc.) from [mydramalist.com](https://mydramalist.com) using Selenium and BeautifulSoup
+
+2.19
+Visualization.ipynb---Updated and renamed as BarPlotAndBoxPlot.ipynb by Zishun
