@@ -31,3 +31,27 @@ EDA and Feature Engineering.ipynb--Uploaded by Mengyan Li--Some EDA and feature 
 2.17
 
 info_reg.ipynb--Uploaded by Zhisheng--Linear regression–y: pop, Standardization/Normalization on info numericals
+
+2.18 -- Shayan
+
+[final_report.ipynb](final_report.ipynb)
+- Final report for the project
+- Merged 3 kdrama datasets (Datasets 1-3): 
+    - Dataset 1: [korean_drama.csv](data/raw/korean_drama.csv), source: [Korean Drama from 2015-2023 with Actors & Reviews by Chanon Charuchinda - Kaggle](https://www.kaggle.com/datasets/chanoncharuchinda/korean-drama-2015-23-actor-and-reviewmydramalist)
+    - Dataset 2: [kdrama_list.csv](data/raw/kdrama_list.csv), source: [Top Korean Drama List (~1500) by Noor Rizki - Kaggle](https://www.kaggle.com/datasets/noorrizki/top-korean-drama-list-1500)
+    - Dataset 3: [top_100_kdrama.csv](data/raw/top_100_kdrama.csv), source: [🏯 Top 100 KDrama 2023 by Gianina-Maria Petrascu - Kaggle](https://www.kaggle.com/datasets/gianinamariapetrascu/top-100-k-drama-2023)
+- Merged merged-kdrama dataset (Datasets 1-3) with: 
+    - Dataset 4: [statistic_id831717_movie-industry-sales-revenue-in-south-korea-2014-2023.xlsx](data/raw/statistic_id831717_movie-industry-sales-revenue-in-south-korea-2014-2023.xlsx), source: [Movie Industry Sales Revenue in South Korea 2014-2023 by ID831717 - Statista](https://www.statista.com/statistics/831717/south-korea-film-industry-sales-revenue/)
+- Merged merged-kdrama dataset (Datasets 1-3) with: 
+    - Dataset 5: [review.csv](data/raw/reviews.csv) dataset, source: [Korean Drama from 2015-2023 with Actors & Reviews by Chanon Charuchinda - Kaggle](https://www.kaggle.com/datasets/chanoncharuchinda/korean-drama-2015-23-actor-and-reviewmydramalist)
+- Wrote functions to web scrape missing info (director, writer, synopsis, etc.) from [mydramalist.com](https://mydramalist.com) using Selenium and BeautifulSoup (but it's very slow...)
+- Classified sentiment of reviews using Hugging Face's `transformers` library and a custom distilbert model
+- Combined: 
+    - [Visualization.ipynb](Visualization.ipynb)
+    - ["Project One DateNew.ipynb"](Project One DateNew.ipynb)
+    - ["EDA and Feature Engineering(2)(1).ipynb"](EDA and Feature Engineering(2)(1).ipynb) + plotted log probabilites from class
+
+[data](./data/) -- folder containing all data files
+[scripts](./scripts/) -- folder containing scripts
+    - [classify_sentiment.py](./scripts/classify_sentiment.py): script to classify sentiment of reviews
+    - [scrape_mydramalist.py](./scripts/scrape_mydramalist.py): script to web scrape missing info (director, writer, synopsis, etc.) from [mydramalist.com](https://mydramalist.com) using Selenium and BeautifulSoup
