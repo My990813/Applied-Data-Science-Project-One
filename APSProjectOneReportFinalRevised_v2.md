@@ -4,9 +4,10 @@ format: pdf
 editor: visual
 ---
 
-# Report for Applied Data Science Project One
+# **STAT W5243: Applied Data Science - Project 1: Korean Drama Analysis**
+**Group 12:** Mengyan Li (ml4779), Zishun Shen (zs2695), Zhisheng Yang (zy2675), Shayan Chowdhury (sc4040)
+**Spring 2025 - February 19, 2025**
 
-Group12: Mengyan Li (ml4779), Zishun Shen (zs2695), Zhisheng Yang (zy2675), Shayan Chowdhury (sc4040)
 
 ##### Link to Github: <https://github.com/My990813/Applied-Data-Science-Project-One>
 
@@ -71,7 +72,7 @@ Our study focus is popularity of Korean dramas. Many variables may contribute to
 
 ## Data Cleaning
 
-![](images/raw%20data1.png){fig-align="left" width="558"}
+![](images/raw%20data1.png){fig-align="left" width="400"}
 
 ![](images/rawdata2.png){fig-align="left"}
 
@@ -292,17 +293,17 @@ Below are the feature engineering we did:
 
 ![](images/features.png){fig-align="left"}
 
-First, we checked the variance of all numerical features and we set a threshold of 0.01. After calculation, no features has zero or near zero variance, thus our features are all good. ![](images/feature2.png) Next, we did box-cox transformation to all numerical variables and did one-hot encoding to all categorical variables. We also tried standardization and normalization to all numerical variables. However, after analyzing the data itself, we think this is unnecessary bacause all the scores are in 10-point system. There is no necessity to normalize/standardize it. However, the number of people who finds the commit helpful and the popularity ranking should be normalized/standardized because we can not easily tell the popularity from the raw data. And the percentage of people who find the commit helpful is better than the raw data of number of people who find helpful. For other numerical variables—Total number of episodes, Each episode duration in second, and rank, we also think this is unnecessary to normalize/standardize them because they all have their unique meaning. And normalize/standardize them makes no sense.
+First, we checked the variance of all numerical features and we set a threshold of 0.01. After calculation, no features has zero or near zero variance, thus our features are all good. ![](images/feature2.png) 
 
-We also think it unnecessary to one-hot encoding all categorical variables. For example, the title of the drama does not need one-hot encoding because each drama name is special and one-hot encoding the title will produce 1248 different variables. However, only one variable needs one-hot encoding—`content_rating` because it only has a few different types that need to be one-hot encoded. We converted categorical data into numerical values so that we could use machine learning algorithms to it. Thus, since `content_rating` included different types of content rating, we one-hot encoded it and converted it to numerical variable so that machine learning algorithms can use it.
+Next, we performed feature transformation. First, it is unnecessary to normalize the 5 score attributes since they are already with the range [0, 10]. It is sufficient to divide them by 10. Then, we performed box-cox transformation to the rest 5 numerical attributes to reduce their skewness. These 5 numerical attributes require rescaling, since their ranges are diverse. The Number of people-finding-this-comment-helpful (n_helpful) is applied normalization instead of standardization because it is skewed to 0. Since Rank and Popularity are both ranking-variables, they are applied the reversive function f(x)=1-x after normalization. Total number of episodes (tot_eps) and Duration of single episode in second (duration) are applied normalization instead of standardization due to their limited value sets.
+Not all categorical variables are encoded. For example, year is not encoded since it is useful as the index for time series analysis; attributes like directors and screenwriters are impractical to encode directly, as this will produce hundreds of new variables. The only variables we applied one-hot encoding to are Content Rating (content_rt) and Aired-on Date (aired_on) because their types are limited. Content Rating was simply one-hot encoded. For Aired-on Date, since a show can be aired on several days of week, we created 7 new variables for each day of week, so each entry can have multiple True values among the 7.
+The following is the refined version of feature engineering:
 
-Thus, below is the refined version of feature engineering:
-
-![](images/featureengineering2.png)
+![](images/featureengineering2.jpg)
 
 Below is the final cleaned data after feature engineering:
 
-![](images/FInalCLeaned.png){fig-align="left"}
+![](images/FInalCLeaned.jpg){fig-align="left"}
 
 ### ML-based Sentiment Analysis
 Since we have access to the full text of the reviews, we decided to analyze the emotional valence of user reviews. To do so, we implemented machine learning-based sentiment analysis using a pre-trained DistilBERT model (we chose the [lxyuan/distilbert-base-multilingual-cased-sentiments-student](https://huggingface.co/lxyuan/distilbert-base-multilingual-cased-sentiments-student) variant due to its performance on benchmark datasets). The model was deployed using the Hugging Face [`transformers`](https://huggingface.co/docs/transformers/en/index) library and configured to run on the optimal available hardware (MPS for Apple Silicon, CUDA for NVIDIA GPUs, or CPU as fallback). Reviews were processed in batches of 100 to optimize computational efficiency while managing memory usage.
