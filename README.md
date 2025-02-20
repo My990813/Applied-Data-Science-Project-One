@@ -101,4 +101,6 @@ EDA and Feature Engineering.ipynb---Modified by Zishun---included additional one
 
 3. Drop all 10 original num_columns, keep StandardScaler and MinMaxScaler of `pop` and `n_helpful`
 
-4. In addition multiple-hot encoded air_on
+4. In addition multiple-hot encoded `air_on`
+
+5. Modified numerical variables transformation
