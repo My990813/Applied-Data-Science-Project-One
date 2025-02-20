@@ -4,15 +4,15 @@ format: pdf
 editor: visual
 ---
 
-## Report for Applied Data Science Project One
+# Report for Applied Data Science Project One
 
 Group12: Mengyan Li (ml4779), Zishun Shen (zs2695), Zhisheng Yang (zy2675), Shayan Chowdhury (sc4040)
 
 ##### Link to Github: <https://github.com/My990813/Applied-Data-Science-Project-One>
 
-### Introduction and Data
+# Introduction and Data
 
-For this project, we analyzed a comprehensive dataset of Korean dramas and their viewer reviews spanning from 2015 to 2023. The project began with team members proposing different datasets, with the Korean Drama dataset (proposed by Mengyan Li) ultimately being selected due to its complexity, data quality challenges, and interpretability potential. We began with the [Korean Drama from 2015-2023 with Actors & Reviews by Chanon Charuchinda - Kaggle](https://www.kaggle.com/datasets/chanoncharuchinda/korean-drama-2015-23-actor-and-reviewmydramalist) dataset, originally compiled by data expert Chanon Charuchinda through web scraping from [MyDramaList.com](https://mydramalist.com).
+The global popularity of Korean dramas (K-dramas) has grown significantly in recent years, presenting an opportunity to analyze the factors contributing to their success and audience reception. Our study examines a comprehensive dataset of K-dramas from 2015 to 2023, integrating information from multiple sources to understand the relationships between production characteristics, viewer ratings, and commercial success. The project began with team members proposing different datasets, with the Korean Drama dataset (proposed by Mengyan Li) ultimately being selected due to its complexity, data quality challenges, and interpretability potential. We began with the [Korean Drama from 2015-2023 with Actors & Reviews by Chanon Charuchinda - Kaggle](https://www.kaggle.com/datasets/chanoncharuchinda/korean-drama-2015-23-actor-and-reviewmydramalist) dataset, originally compiled by data expert Chanon Charuchinda through web scraping from [MyDramaList.com](https://mydramalist.com).
 
 With that dataset as our starting point, we worked with five distinct but related datasets: 
 
@@ -55,17 +55,21 @@ As explained by Chanon Charuchinda, the data was taken from <https://mydramalist
 
 There are 10 columns in review.csv including user ID, drama name, Score for Story, Score for acting, Score for music, Score for rewatch value, Overall Score, Review, Number of episode that the reviewer watched, and Number of people on the website that find this comment helpful.
 
-TODO: mention correlation between popularity and revenue, and popularity and rating, and popularity and sentiment of reviews
+## Research Objectives
+Our analysis focused on three key relationships: 
+1. the connection between popularity, ranking and viewer ratings
+1. the relationship between popularity and textual review sentiment (using NLP methods)
+1. the correlation between drama popularity and industry revenue
 
-### Methodology
+# Methodology
 
-#### Initial Data Collection
+## Initial Data Collection
 
 Because of interest in Korean drama, we searched Korean drama on Kaggle and found the files. The data was taken from <https://mydramalist.com/shows/top_korean_dramas?page=1> through web scraping by Chanon Charuchinda–a data expert on Kaggle. The data is structured data with data quality problem such as date format, missing value, and outliers. The date contains mismatched date. Some are month-date-year but some are date-month-year. There are many missing values and outliers. For example, in the `pop` column in korean_drama.csv, there are many 99999 which are different from other Popularity Ranking values and are obviously outliers. And for missing values: there are many missing values in the categorical variable for example director name. And we cannot use KNN or other imputation methods for it.
 
 Our study focus is popularity of Korean dramas. Many variables may contribute to the popularity such as the length of drama, music, and acting. Thus we focus on what score the users give to the dramas in many different sectors–music, story, acting, etc. And we also look at the correlation between different variables such as rank and popularity. We used multiple statistical methods such as t-test, linear regression to approach this problem and found meaningful results.
 
-#### Data Cleaning
+## Data Cleaning
 
 ![](images/raw%20data1.png){fig-align="left" width="558"}
 
@@ -79,8 +83,8 @@ The second step **addressed inconsistencies in date formatting** across the data
 
 The third step involved **handling missing values** in the dataset. Our analysis revealed that the majority of missing data occurred in three main categories: director names, screenwriter names, and network information. While our initial plan was to complete these missing entries through web scraping from various drama databases, time constraints of our two-week project deadline made this approach impractical. We did end up writing a script for web scraping using Selenium and BeautifulSoup (can be found under [scripts/scrape_mydramalist.py](./scripts/scrape_mydramalist.py)), but due to rate limiting, we were unable to scrape all the necessary data in time. Theoretically with more time, we could have scraped all the missing data and filled in the missing values. Instead, we opted to replace missing categorical values with "Others" as a placeholder and removed entries with missing numerical values to maintain data integrity for our quantitative analyses.
 
-#### Data Merging
-##### Merging the Korean Drama Datasets (Datasets 1-3)
+## Data Merging
+### Merging the Korean Drama Datasets (Datasets 1-3)
 To combine the three Korean drama datasets spanning 2015-2023, since we noticed that all the datasets have the drama names (with different column names), we decided to merge the datasets using that column. 
 
 First, datasets 1 (1,752 dramas) and 2 (1,647 dramas) were merged using an outer join on the title column, resulting in 2,302 unique entries. Missing values in overlapping columns were filled using corresponding values from the other dataset, with special handling for episode counts that required string parsing.
@@ -92,10 +96,10 @@ The following is the final merged and cleaned Korean Dramas dataset, spanning 3 
 
 ![](images/finaldata.png){fig-align="left"}
 
-##### Merging the (Merged) Korean Drama Dataset with Review Data (Datasets 5)
+### Merging the (Merged) Korean Drama Dataset with Review Data (Datasets 5)
 For merging the merged Korean Drama Dataset with the Review dataset (Dataset 5), we similarly merged the two tables on their respective drama title columns, and then dropped any rows where numerical values were missing. This resulted in a final dataset of 11,776 rows with 32 columns.
 
-##### Merging the (Merged) Korean Drama Dataset with Yearly Revenue Data (Datasets 4)
+### Merging the (Merged) Korean Drama Dataset with Yearly Revenue Data (Datasets 4)
 Since this merging process is a little bit different from the previous two merges, we will explain it in detail. 
 
 Just to demonstrate, the revenue data is yearly:  
@@ -128,7 +132,7 @@ Here are some notable findings from the line plots and correlation matrix above:
 - The positive correlation between `tot_eps` and `revenue` (0.68) implies that longer series historically generated more revenue, though this trend might be changing
 - The relatively weak correlation between `revenue` and `popularity/rank` (-0.062/-0.00023) suggests that commercial success isn't necessarily tied to traditional popularity metrics
 
-#### Exploratory Data Analysis
+## Exploratory Data Analysis
 
 Below is the summary statistics of variables: We can see the mean for `music_score`, `story_score`, `acting_cast_score`, `rewatch_value_score`, and `overall_score` are very close to the median compared to other variables. Although they are close, the data itself is still skewed. The standard deviation of the popularity ranking is the highest, meaning there is a lot of variation in the data.
 
@@ -156,7 +160,7 @@ Definition of each variable (column header):
 - `overall_score`: User-submitted overall score (from reviews)
 - `n_helpful`: Number of people that found review helpful (from reviews)
 
-##### Distribution of Numerical Variables (and Log Transformed)
+### Distribution of Numerical Variables (and Log Transformed)
 
 To study the distribution of numerical variables, we first plotted the histograms of all numeric variables, along with log transformations of those distributions as done in class. Below are the histograms of greatest interest, but all the distributions can be found in our [final_report.ipynb](./final_report.ipynb) Jupyter notebook.
 
@@ -186,7 +190,7 @@ To study the distribution of numerical variables, we first plotted the histogram
 - `overall_score` is left skewed, meaning most audience gave high scores to the drama overall. The data for the `n_helpful` (number of people that found review helpful) is right skewed, meaning the review are very personalized so that not so many people hold same opinion.
 
 
-##### Correlation Heatmap and Plots of Numerical Variables
+### Correlation Heatmap and Plots of Numerical Variables
 
 Below is the correlation heatmap of all numerical values and some notable findings:
 ![](images/corr_matrix_reviews.png)
@@ -199,7 +203,7 @@ Digging deeper into individual variable correlations, we can see that `pop` (pop
 
 ![](images/v2merge.png){fig-align="left"}
 
-##### Linear Regression Analysis
+### Linear Regression Analysis
 
 Same thing happened when we look at the linear regression plot. We can see that there is a positive relationship between `pop` (popularity rank) and `rank`. We also found that there is a negative relationship between `duration` and `pop`, meaning longer drama has higher popularity. Interesting thing to see is that there is a negative relationship between `n_helpful` (number of people found the review helpful) and `pop`, meaning when there is more people sharing same opinion, the drama is more popular.
 
@@ -256,7 +260,7 @@ There is significant scatter in the predicted values, especially in the higher p
 | Duration of each episode | 2.65         | 0.01    |
 | rank                     | -0.79        | 0.43    |
 
-##### T-test on Standardized Variables
+### T-test on Standardized Variables
 
 In this T-test on standardized variables, the null hypothesis (H₀) states that there is no significant difference in the mean values of each feature between the training and test sets. The results indicate that most features, including `year`, `tot_eps` (total number of episodes), and `rank`, are well-balanced between the training and test sets, as their high p-values suggest no significant difference in their distributions. However, `duration` stands out with a statistically significant p-value (0.008), implying a potential distribution shift between the two sets. This suggests that the model might face inconsistencies when predicting dramas with extreme duration values, possibly affecting overall performance.
 
@@ -280,9 +284,9 @@ From the boxplots, we can see Korean Drama ranking increased from 2015 to 2018, 
 
 From the missing value heatmap, we can see most missing values are the name of directors and screenwriters, and Network that it aired on.
 
-#### Feature Engineering
+## Feature Engineering
 
-##### Variance and Box-Cox Transformation
+### Variance and Box-Cox Transformation
 
 Below are the feature engineering we did:
 
@@ -300,7 +304,7 @@ Below is the final cleaned data after feature engineering:
 
 ![](images/FInalCLeaned.png){fig-align="left"}
 
-##### ML-based Sentiment Analysis
+### ML-based Sentiment Analysis
 Since we have access to the full text of the reviews, we decided to analyze the emotional valence of user reviews. To do so, we implemented machine learning-based sentiment analysis using a pre-trained DistilBERT model (we chose the [lxyuan/distilbert-base-multilingual-cased-sentiments-student](https://huggingface.co/lxyuan/distilbert-base-multilingual-cased-sentiments-student) variant due to its performance on benchmark datasets). The model was deployed using the Hugging Face [`transformers`](https://huggingface.co/docs/transformers/en/index) library and configured to run on the optimal available hardware (MPS for Apple Silicon, CUDA for NVIDIA GPUs, or CPU as fallback). Reviews were processed in batches of 100 to optimize computational efficiency while managing memory usage.
 
 The analysis revealed a relatively balanced distribution between positive (4,891) and negative (4,871) reviews, with only 61 classified as neutral. This sentiment data was merged with our existing features to provide additional context for understanding viewer reception patterns and their relationship with drama characteristics like episode length, acting scores, and overall popularity.
@@ -311,7 +315,7 @@ Below is the correlation matrix of the sentiment analysis with notable findings:
 - Positive sentiment shows moderate positive correlations with `story_score` (0.4), `rewatch_value_score` (0.41), and `overall_score` (0.41)—suggesting that better-rated dramas tend to generate more positive sentiment in reviews. This also demonstrates that the sentiment analysis is working as intended; the text of the reviews is being analyzed correctly.
 - `sentiment_neutral` shows very weak correlations across the board, suggesting neutral reviews don't strongly relate to any other metrics
 
-#### Key Findings
+# Key Findings
 
 Our comprehensive analysis of **Korean drama data from 2015-2023** revealed several significant patterns across multiple dimensions of the industry. Through statistical analysis of features and audience reception, we identified clear trends in viewing preferences and content evolution.
 
@@ -321,7 +325,7 @@ Our comprehensive analysis of **Korean drama data from 2015-2023** revealed seve
 
 **Audience Reception Analysis (Reviews)**: Content format preferences emerged as a crucial factor in drama success. Our analysis revealed that dramas with **fewer than 20 episodes** consistently achieved higher popularity rankings, indicating a clear audience preference for more concise storytelling formats. This finding was reinforced by the **negative correlation (-0.38)** between episode duration and popularity ranking. The **bi-modal distribution of rewatch value scores** further suggested that dramas tend to fall into two distinct categories: highly rewatchable content (scoring 9-10) or single-viewing experiences (scoring 1-2). Similarly, since there is a negative relationship between overall score/rewatch value score/music score and popularity ranking and there is a positive relationship between story score/acting cast score and popularity ranking, it's likely that most of the audience enjoys a Korean drama because of its story and acting cast, but higher level of music or rewatch value means less popularity. In other words, most audience may not like a Korean drama due to its music or rewatch value.
 
-#### Challenges and Future Recommendations
+# Challenges and Future Recommendations
 
 Our research encountered several significant challenges that inform our recommendations for future studies. **Data quality** presented persistent challenges, particularly regarding missing information for directors and screenwriters, inconsistent date formatting across sources, and varying levels of completeness in our multiple data sources. These issues required substantial preprocessing and standardization efforts.
 
@@ -331,7 +335,7 @@ Looking forward, we recommend several key areas for future research enhancement.
 
 Additionally, incorporating production **budget data**, international **viewing statistics**, and **marketing spend** information would provide a more complete picture of drama success factors. These enhancements, combined with robust cross-validation methods and ensemble prediction approaches, would significantly advance our understanding of the Korean drama industry's evolution and success factors. Going even further, given the abundance of text data in our dataset, implementation of **topic modeling** on review text and synopses could uncover deeper thematic trends.
 
-##### Contribution:
+# Contribution:
 - **Mengyan Li (ml4779)**: Finding the data, Data Cleaning(fixing date format, remove outliers, merge datasets, drop/change to others for missing values), EDA(summary statistics, linear regression for the merged data and review.csv,correlation heatmap, missing value heatmap, histrogram for numerical variables), feature engineering(filter out zero/near-zero variance features, Box-Cox transformation, standardization/normalization, one-hot encoding), Report drafting
 
 - **Zishun Shen (zs2695)**: EDA(tentatively approach to visualize the dataset, top and bottom ranking of the directors and screenwriters through popularity rank and rank, ranking through year boxplot), feature engineering (one-hot encoding)
