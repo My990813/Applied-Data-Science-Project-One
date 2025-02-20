@@ -36,10 +36,52 @@ Applied-Data-Science-Project-One/
 └── APSProjectOneReportFinalRevised.pdf # Final written report (PDF)
 ```
 
+## Datasets
+1. **Korean Drama Dataset (2015-2023)**
+   - Source: [Kaggle - Korean Drama from 2015-2023](https://www.kaggle.com/datasets/chanoncharuchinda/korean-drama-2015-23-actor-and-reviewmydramalist)
+   - Contains: Basic metadata, production details, broadcast information, content details, performance metrics
+
+2. **Top Korean Drama List (~1500)**
+   - Source: [Kaggle - Top Korean Drama List](https://www.kaggle.com/datasets/noorrizki/top-korean-drama-list-1500)
+   - Complementary dataset with additional drama information
+
+3. **Top 100 K-dramas 2023**
+   - Source: [Kaggle - Top 100 KDrama 2023](https://www.kaggle.com/datasets/gianinamariapetrascu/top-100-k-drama-2023)
+   - Detailed information on top-performing dramas
+
+4. **Movie Industry Revenue Data**
+   - Source: [Statista - Movie Industry Sales Revenue in South Korea](https://www.statista.com/statistics/831717/south-korea-film-industry-sales-revenue/)
+   - Annual revenue data from 2014-2023
+
+5. **User Reviews Dataset**
+   - Part of Dataset 1
+   - Contains: User ratings, reviews, and engagement metrics
+
+## Data Processing Pipeline
+1. **Initial Data Cleaning**
+   - Outlier removal using IQR method
+   - Date format standardization to YYYY-MM-DD
+   - Missing value handling
+   
+2. **Data Merging**
+   - Combined three K-drama datasets using outer joins
+   - Merged with review data and revenue data
+   - Standardized column names and formats
+
+3. **Feature Engineering**
+   - Box-Cox transformations for numerical variables
+   - Standardization and Min-Max scaling
+   - One-hot encoding for categorical variables
+   - Multiple-hot encoding for aired_on days
+   - ML pipeline for sentiment analysis
+
+## Requirements
+- Python 3.10+
+- Required packages: pandas, numpy, scikit-learn, transformers, beautifulsoup4, selenium
+
 ## Usage
 - Most of the main code is in the [`final_report.ipynb`](final_report.ipynb) notebook, which you can run. 
 - Further analysis and feature engineering are in the other notebooks in the [`notebooks`](notebooks/) folder.
-
 
 ## Changelog
 2.11
