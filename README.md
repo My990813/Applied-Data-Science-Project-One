@@ -2,8 +2,12 @@
 2.11
 
 Project One DateNew.ipynb---Uploaded by Mengyan Li--Fix some mismatch in data(unify the date format to M-D-Y)
+Dropping some data with incomplete dates (only contains month and year)
+Using strftime('%m-%d-%Y') to unify the format of the start date and the end date
 
 Project One New(1).ipynb---Uploaded by Mengyan Li--Remove outliers in review.csv and korean_drama.csv
+Building boxplot using the interquartile range
+removing any outliers above the upper limit and below the lower limit.
 
 UpdatedNew.csv---Uploaded by Mengyan Li--The cleaned version of korean_drama.csv by fixing the date and removing outliers
 
@@ -16,17 +20,29 @@ Visualization.ipynb---Created By Zishun Shen
 
 2.13
 
-Final Cleaning Data(1)---Uploaded by Mengyan Li--Final cleaned version of korean_drama.csv by changing missing values to Others and dropping some missing values in numeric variables. 
+Final Cleaning Data(1).csv---Uploaded by Mengyan Li--Final cleaned version of korean_drama.csv by changing missing values to Others and dropping some missing values in numeric variables. 
 
 2.16
 
 MergeData(1).ipynb--Uploaded by Mengyan Li--Merged Final Cleaning Data(1) and newreview.csv
+Using groupby function in pandas and grouped the review.csv by drama names
+Calculating the mean of the scores by the users who marked the same drama
+Using the mean score as the score for this specific drama
+Doing this for Score for Story, Score for acting, Score for music, Score for rewatch value and Overall Score
 
 CLeaned Merged Dataset.csv--Uploaded by Mengyan Li--The cleaned version of merged datasets (Final Cleaning Data(1) and newreview.csv)
 
 Visualization1.qmd--Uploaded by Mengyan Li--The linear regresion visualization of newreview.csv(dependent variable: overall score) and the linear regression visualization of CLeaned Merged Dataset.csv (dependent variable: poplarity)
+Visualizing the regression line and the plotting
 
 EDA and Feature Engineering.ipynb--Uploaded by Mengyan Li--Some EDA and feature engineering to the merged dataset
+Summary statistics of all numerical features 
+Correlation heatmap of all numerical features
+Histogram of all numerical features
+Zero Variance/ Near zero variance checking
+Missing value heatmap to check the pattern of all missing values
+Box-Cox Transformation and one-hot encoding
+Standardization/Normalization to necessary features
 
 2.17
 
@@ -57,6 +73,7 @@ info_reg.ipynb--Uploaded by Zhisheng--Linear regression–y: pop, Standardizatio
     - [scrape_mydramalist.py](./scripts/scrape_mydramalist.py): script to web scrape missing info (director, writer, synopsis, etc.) from [mydramalist.com](https://mydramalist.com) using Selenium and BeautifulSoup
 
 2.19
+APSProjectOneReportFinalRevised.pdf--Uploaded by Mengyan Li--draft of the report
 
 Visualization.ipynb---Updated and renamed as BarPlotAndBoxPlot.ipynb by Zishun
 
