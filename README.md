@@ -1,4 +1,47 @@
-# Applied-Data-Science-Project-One
+# **STAT W5243: Applied Data Science - Project 1: Korean Drama Analysis**
+**Group 12:** Mengyan Li (ml4779), Zishun Shen (zs2695), Zhisheng Yang (zy2675), Shayan Chowdhury (sc4040)
+**Spring 2025 - February 19, 2025**
+
+## Project Overview
+This project analyzes Korean drama data from 2015-2023, examining factors contributing to their success and audience reception. We combine multiple datasets, perform extensive data cleaning, and conduct statistical analyses to understand relationships between production characteristics, viewer ratings, and commercial success.
+
+## Repository Structure
+```
+Applied-Data-Science-Project-One/
+├── data/
+│ ├── raw/ # Original datasets
+│ │ ├── korean_drama.csv # Main K-drama dataset (2015-2023)
+│ │ ├── kdrama_list.csv # Top ~1500 K-dramas
+│ │ ├── top_100_kdrama.csv # Top 100 K-dramas of 2023
+│ │ ├── reviews.csv # User reviews dataset
+│ │ └── statistic_id831717_movie-industry-sales-revenue-in-south-korea-2014-2023.xlsx
+│ └── processed/ # Cleaned and transformed datasets
+│ ├── kdramas_merged.csv # Merged drama datasets
+│ ├── UpdatedNew.csv # Cleaned korean_drama.csv
+│ ├── newreview.csv # Cleaned reviews.csv
+│ └── CLeaned Merged Dataset.csv # Final merged dataset
+├── notebooks/
+│ ├── final_report.ipynb # Final project report and analysis
+│ ├── EDA and Feature Engineering.ipynb
+│ ├── MergeData(1).ipynb # Data merging process
+│ ├── Project One DateNew.ipynb # Date format standardization
+│ ├── Project One New(1).ipynb # Initial data cleaning
+│ ├── BarPlotAndBoxPlot.ipynb # Visualization notebooks
+│ ├── Visualization1.qmd # Linear regression visualizations
+│ └── info_reg.ipynb # Linear regression analysis
+├── scripts/
+│ ├── classify_sentiment.py # Sentiment analysis of reviews
+│ └── scrape_mydramalist.py # Web scraping script for missing data
+├── APSProjectOneReportFinalRevised.md # Final written report (Markdown)
+└── APSProjectOneReportFinalRevised.pdf # Final written report (PDF)
+```
+
+## Usage
+- Most of the main code is in the [`final_report.ipynb`](final_report.ipynb) notebook, which you can run. 
+- Further analysis and feature engineering are in the other notebooks in the [`notebooks`](notebooks/) folder.
+
+
+## Changelog
 2.11
 
 Project One DateNew.ipynb---Uploaded by Mengyan Li--Fix some mismatch in data(unify the date format to M-D-Y)

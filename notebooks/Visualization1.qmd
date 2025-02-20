@@ -1,0 +1,38 @@
+---
+title: "Visualization 1"
+author: "Mengyan Li"
+format: pdf
+editor: visual
+jupyter: python3
+---
+
+```{r}
+datatable<-read.csv("/Users/limengyan/Downloads/newreview.csv")
+datatable
+```
+
+```{r}
+model<-lm(datatable$overall_score~datatable$story_score + datatable$acting_cast_score + datatable$music_score + datatable$rewatch_value_score, data = datatable)
+summary(model)
+```
+
+```{r}
+#load car package
+library(car)
+
+#produce added variable plots
+avPlots(model)
+```
+
+```{r}
+data<-read.csv("/Users/limengyan/Downloads/CLeaned Merged Dataset.csv")
+data
+```
+
+```{r}
+model2<-lm(data$pop~data$story_score + data$acting_cast_score + data$music_score + data$rewatch_value_score+data$tot_eps+data$duration+data$rank+data$overall_score+data$n_helpful, data = data)
+summary(model2)
+
+#produce added variable plots
+avPlots(model2)
+```

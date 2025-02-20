@@ -303,7 +303,7 @@ The following is the refined version of feature engineering:
 
 Below is the final cleaned data after feature engineering:
 
-![](images/FInalCLeaned.jpg){fig-align="left"}
+![](./images/FInalCLeaned.jpg){fig-align="left"}
 
 ### ML-based Sentiment Analysis
 Since we have access to the full text of the reviews, we decided to analyze the emotional valence of user reviews. To do so, we implemented machine learning-based sentiment analysis using a pre-trained DistilBERT model (we chose the [lxyuan/distilbert-base-multilingual-cased-sentiments-student](https://huggingface.co/lxyuan/distilbert-base-multilingual-cased-sentiments-student) variant due to its performance on benchmark datasets). The model was deployed using the Hugging Face [`transformers`](https://huggingface.co/docs/transformers/en/index) library and configured to run on the optimal available hardware (MPS for Apple Silicon, CUDA for NVIDIA GPUs, or CPU as fallback). Reviews were processed in batches of 100 to optimize computational efficiency while managing memory usage.
